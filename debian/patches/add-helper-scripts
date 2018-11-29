@@ -1,0 +1,38 @@
+Description: Add some helper scripts
+ Adds a helper script to allow us to not have to store the bootscript content
+ in the repository and instructions on how to use it.
+Author: Julian Calaby <julian.calaby@gmail.com>
+
+--- /dev/null
++++ pidp11-bootscripts-0.1/README.md
+@@ -0,0 +1,9 @@
++Build Instructions:
++
++This requires Oscar's bootscripts from his Google drive, linked from his Github here: https://github.com/PiDP/pidp11
++
++1. Download it and store it somewhere on your computer
++2. Run ./repack_bootscripts.sh with the path to the zip file as the first argument and the version as the second. It's currently 0.1 - see debian/changelog
++3. Build the package in the current directory - it'll use the file created _in the parent directory_, e.g. ../pidp11-bootscripts_0.1.orig.tar.xz
++
++Note that the bootscripts will be extracted into the "bootscripts" directory.
+--- /dev/null
++++ pidp11-bootscripts-0.1/repack_bootscripts.sh
+@@ -0,0 +1,18 @@
++#!/bin/bash
++
++usage() {
++	echo $0 "bootscripts.zip" "<version>"
++	exit 1;
++}
++
++echo $#
++
++if [ $# -ne 2 ]; then
++	usage $0;
++fi
++
++set +x
++
++unzip $1
++
++tar -cavf ../pidp11-bootscripts_$2.orig.tar.xz --transform="s/^/pidp11-bootscripts-$2\//" bootscripts/
