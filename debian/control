@@ -9,5 +9,5 @@ Homepage: https://github.com/PiDP/pidp11
 #Vcs-Git: https://salsa.debian.org/debian/pidp11-bootscripts.git
 
 Package: pidp11-bootscripts
-Architecture: any
+Architecture: all
 Description: PDP-11 OS images and bootscripts
